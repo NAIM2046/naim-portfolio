@@ -1,19 +1,49 @@
 export interface ProductionApp {
   id: string;
   title: string;
-  category: 'E-Commerce' | 'EdTech' | 'NGO' | 'News';
+  subtitle?: string;
+  category: 'E-Commerce' | 'EdTech' | 'FinTech' | 'NGO' | 'News';
   description: string;
-  liveUrl: string;
+  liveUrl?: string;
+  image?: string;
   stack: string[];
   highlights: string[];
   metrics: string;
   iconName: string;
+  scope?: {
+    role: string;
+    timeline: string;
+    targetUsers: string;
+    platforms: string;
+  };
+  problems?: {
+    title: string;
+    detail: string;
+  }[];
   caseStudy: {
     challenge: string;
     solution: string;
     architecture: string;
-    keyTechnicalFeatures: string[];
   };
+  architectureDetails?: {
+    frontend: string[];
+    backend: string[];
+  };
+  engineeringHighlights?: {
+    title: string;
+    challenge?: string;
+    points: string[];
+  }[];
+  impactMetrics?: {
+    metric: string;
+    before: string;
+    after: string;
+    improvement: string;
+  }[];
+  standoutPoints?: {
+    title: string;
+    detail: string;
+  }[];
 }
 
 export interface EngineeringProject {
@@ -39,7 +69,7 @@ export const PERSONAL_INFO = {
   },
   github: 'https://github.com/NAIM2046',
   linkedin: 'https://www.linkedin.com/in/naimju/',
-  nexovateLabs: 'https://www.nexovatelabs.com/',
+  upwork: 'https://www.upwork.com',
   leetcode: 'https://leetcode.com/u/NAIM1111/',
   codeforces: 'https://codeforces.com/profile/naim_2046',
   codechef: 'https://www.codechef.com/users/naim2046',
@@ -48,122 +78,555 @@ export const PERSONAL_INFO = {
 
 export const PRODUCTION_APPS: ProductionApp[] = [
   {
-    id: 'elumpu',
-    title: 'Elumpu',
-    category: 'E-Commerce',
-    description: 'An enterprise-grade multi-vendor e-commerce platform engineered for scale, featuring secure multi-seller verification, real-time inventory management, dedicated seller analytics dashboards, high-concurrency order processing, and RabbitMQ async invoice messaging.',
-    liveUrl: 'https://elumpu.com',
-    stack: ['Next.js', 'React', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'RabbitMQ', 'Tailwind CSS'],
-    highlights: ['Multi-Vendor Architecture', 'RabbitMQ Invoice Queue', 'Secure Seller Verification', 'Business Analytics Dashboard'],
-    metrics: 'Multi-Vendor Scale',
-    iconName: 'ShoppingBag',
+    id: 'ju-hall-token',
+    title: 'JU Hall Dining Token & Management System (আমারকুপন)',
+    subtitle: 'Next-Gen University Dining Automation, Digital Wallet & Offline-Ready Token Verification',
+    category: 'FinTech',
+    description:
+      'An enterprise-grade, mobile-first dining management and campus fintech platform built for Jahangirnagar University’s residential halls. Replaces paper meal tokens, inaccurate kitchen estimation, and manual bookkeeping with real-time digital pre-ordering, digital wallets, sub-second QR token validation, and automated dining analytics.',
+    liveUrl: 'https://amarcoupon.com',
+    image: '/projects/ju-hall-token.jpg',
+    stack: [
+      'Next.js',
+      'TypeScript',
+      'Tailwind CSS',
+      'Shadcn UI',
+      'TanStack React Query',
+      'Node.js',
+      'Express.js',
+      'PostgreSQL',
+      'Prisma',
+      'IndexedDB',
+      'WebRTC',
+    ],
+    highlights: [
+      'Sub-300ms WebRTC QR Token Scanner',
+      'Offline-First IndexedDB Sync Queue',
+      'Digital Wallet (bKash / Nagad) & Failed Trx Desk',
+      '4-Tier RBAC for 10,000+ Residential Students',
+    ],
+    metrics: '10,000+ Target Users',
+    iconName: 'Utensils',
+    scope: {
+      role: 'Full Stack Software Engineer & UI/UX Architect',
+      timeline: 'Production-Deployed & Actively Used',
+      targetUsers: '10,000+ University Residential Students, Hall Dining Staff, Hall Administrators & Super Admins',
+      platforms: 'Mobile-First Progressive Web App (PWA) & Cloud Management Portal',
+    },
+    problems: [
+      {
+        title: 'Extreme Dining Hall Congestion',
+        detail:
+          'During peak lunch (1:00 PM – 2:30 PM) and dinner (8:00 PM – 9:30 PM) windows, manual paper coupon stamping caused line delays of 15–25 minutes per student.',
+      },
+      {
+        title: 'Food Wastage & Shortages',
+        detail:
+          'Kitchen managers lacked accurate pre-service headcounts, leading to either drastic food shortages or expensive meal wastage daily.',
+      },
+      {
+        title: 'Financial Leakage & Token Fraud',
+        detail:
+          'Paper tokens were prone to duplication, sharing, and manual accounting errors.',
+      },
+      {
+        title: 'Network Dropouts in Dining Basements',
+        detail:
+          'Dining halls frequently suffer from weak cellular and Wi-Fi reception, causing traditional online-only verification systems to fail.',
+      },
+    ],
     caseStudy: {
-      challenge: 'Managing high-concurrency simultaneous orders across hundreds of vendors, preventing inventory race conditions, verifying seller identity credentials, and sending instant customer invoice notifications without blocking main HTTP threads.',
-      solution: 'Architected relational PostgreSQL database schemas with Prisma ORM and decoupled heavy tasks into an asynchronous RabbitMQ message queue service for instantaneous invoice SMS/Email dispatching and seller inventory locking.',
-      architecture: 'Next.js App Router SSR + Node.js/Express API Gateway + PostgreSQL DB + Prisma ORM + RabbitMQ Asynchronous Worker + Redis Caching.',
-      keyTechnicalFeatures: [
-        'RabbitMQ Asynchronous Queue for instant invoice notifications & message dispatching without API bottleneck',
-        'Secure Multi-Seller Verification Pipeline with document verification, KYC workflows & role-based RBAC access',
-        'Real-Time Seller Inventory Management with optimistic lock handling for concurrent order spikes',
-        'Dedicated Business Analytics Dashboard for vendors (revenue tracking, sales trends, inventory alerts)',
-        'High-Concurrency Checkout Gateway handling peak buyer transactions concurrently',
+      challenge:
+        'Peak dining bursts cannot tolerate 2-second cloud roundtrips or basement Wi-Fi dropouts while serving hundreds of students within a 60-minute window.',
+      solution:
+        'Built a unified 4-tier role-based PWA with a sub-300ms WebRTC QR scanner, pre-cached offline token verification via IndexedDB, time-locked dynamic meal cutoffs, and a Super Admin Failed Transaction Resolution Desk.',
+      architecture:
+        'Next.js App Router + TypeScript + TanStack Query PWA <-> Node.js / Express.js REST Microservices + JWT RBAC <-> PostgreSQL + Prisma ORM + IndexedDB Offline Sync Queue.',
+    },
+    architectureDetails: {
+      frontend: [
+        'Next.js App Router (Server & Client Components) with 100% strict TypeScript',
+        'Tailwind CSS + Shadcn UI with mobile-first bottom navigation & safe-area inset protection',
+        'TanStack React Query for optimistic UI updates and smart background revalidation',
+        'WebRTC camera stream QR scanner with 1-tap segmented mode switcher (Camera, Manual Code, Offline Sync)',
+      ],
+      backend: [
+        'Node.js & Express.js RESTful microservices with payload rate-limiting',
+        'PostgreSQL relational schema managed with Prisma ORM',
+        'JWT Authentication, 4-tier Role-Based Access Control (RBAC), and bcrypt password hashing',
+        'IndexedDB client queue with conflict-resolution timestamps for automatic background sync',
       ],
     },
+    engineeringHighlights: [
+      {
+        title: '1. Sub-Second QR Token Validation & Offline Resilience',
+        challenge: 'Peak dining periods cannot tolerate 2-second cloud roundtrips or Wi-Fi drops.',
+        points: [
+          'Token scanner operates at sub-300ms verification speed via WebRTC camera streams.',
+          'Staff devices pre-cache authorized daily tokens; offline scans verify against local storage and flush asynchronously once connectivity resumes.',
+          '1-tap segmented mode switcher toggles between Camera Scan, Manual Code Entry, and Offline Sync status without scrolling.',
+        ],
+      },
+      {
+        title: '2. Time-Locked Dynamic Meal Booking',
+        points: [
+          'Automated cutoff timers lock meal sales before preparation begins (e.g., 10:00 AM for lunch, 4:00 PM for dinner).',
+          'Kitchen managers receive an exact buyer roster and headcount breakdown with 1-click printable and PDF export formats, eliminating food wastage.',
+        ],
+      },
+      {
+        title: '3. Student Digital Wallet & Failed Transaction Recovery',
+        points: [
+          'Students recharge balances seamlessly via mobile financial services (bKash, Nagad).',
+          'Dedicated Failed Transaction Resolution Desk in the Super Admin dashboard lets admins verify and credit unmatched payment gateway callbacks with one click.',
+        ],
+      },
+      {
+        title: '4. Native Mobile Ergonomics & Localization',
+        points: [
+          'Replaced cluttered top hamburger menus with native-style status pills and single-thumb bottom navigation tabs.',
+          'Full Bengali language localization alongside accessible high-contrast UI surfaces.',
+        ],
+      },
+    ],
+    impactMetrics: [
+      { metric: 'Meal Queue Wait Time', before: '15–25 minutes', after: '< 3 seconds', improvement: '~85% Reduction' },
+      { metric: 'Daily Kitchen Food Wastage', before: '12–18% unserved', after: '< 2%', improvement: 'Over 80% Saved' },
+      { metric: 'Token Verification Speed', before: 'Manual paper checking', after: 'Sub-300ms scan', improvement: 'Instant' },
+      { metric: 'Offline Downtime Incidents', before: 'Kitchen stopped', after: 'Zero downtime', improvement: '100% Uptime' },
+    ],
+    standoutPoints: [
+      {
+        title: 'High-Stress Real-World Domain',
+        detail: 'Handles high-concurrency peak bursts where hundreds of students scan tokens within a narrow 60-minute window.',
+      },
+      {
+        title: 'True Offline-First Thinking',
+        detail: 'Engineered for unstable campus Wi-Fi environments using client-side cache synchronization.',
+      },
+      {
+        title: 'Production Polish',
+        detail: 'Complete Bengali localization, accessible contrast ratios, multi-tier RBAC, and mobile-first ergonomics.',
+      },
+    ],
+  },
+  {
+    id: 'elumpu',
+    title: 'Elumpu',
+    subtitle: 'Multi-Vendor Bangladeshi Digital Marketplace — Seller KYC, Variant Catalog & Event-Driven Architecture',
+    category: 'E-Commerce',
+    description:
+      'A multi-vendor e-commerce platform purpose-built for the Bangladeshi digital marketplace. Engineered the core pre-order marketplace architecture: 3-tier role-based access, verified seller KYC onboarding, full product variant management, subscription-gated features, zone-based shipping, and flash deals.',
+    liveUrl: 'https://elumpu.com',
+    image: '/projects/elumpu.jpg',
+    stack: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'Node.js',
+      'Express',
+      'PostgreSQL',
+      'Prisma',
+      'Redis',
+      'RabbitMQ',
+      'Docker',
+      'Redux Toolkit',
+      'TanStack Query',
+      'Zod',
+      'Socket.IO',
+      'AWS S3',
+      'Sharp',
+      'Google OAuth 2.0',
+    ],
+    highlights: [
+      'Structured Seller Onboarding with KYC',
+      'Full Product Variant & Storefront Engine',
+      'Subscription-Gated API & UI Access',
+      'RabbitMQ, Redis & AWS S3 Presigned Uploads',
+    ],
+    metrics: '30+ DB Models • 3-Tier Roles',
+    iconName: 'ShoppingBag',
+    scope: {
+      role: 'Full-Stack Engineer (Core Marketplace, Seller KYC, Catalog, Subscriptions & Pre-Order Flow)',
+      timeline: 'Production-Deployed',
+      targetUsers: 'Marketplace Shoppers, Verified Sellers & Platform Administrators (3-Tier Role Architecture)',
+      platforms: 'Web Storefront, Seller Dashboard & Admin Panel',
+    },
+    problems: [
+      {
+        title: 'Multi-Tenant Role Boundaries',
+        detail:
+          'Every feature had to cleanly separate Customers (browsing across stores), Sellers (managing storefronts & inventory), and Admins (governing KYC & subscriptions) within one unified codebase.',
+      },
+      {
+        title: 'Bangladeshi Marketplace Constraints',
+        detail:
+          'Seller verification required government-issued National ID or Trade License documents, alongside sharp shipping rate differences across same-district, Dhaka inter-district, and cross-country zones.',
+      },
+      {
+        title: 'Subscription-Driven Sustainability',
+        detail:
+          'The platform needed Base and Add-on subscription tiers to gate merchant capabilities (product limits, branding, flash sale access) rather than relying solely on per-transaction fees.',
+      },
+    ],
+    caseStudy: {
+      challenge:
+        'Architecting a scalable 3-tier multi-vendor foundation—covering verified KYC onboarding, complex product variants, media optimization, subscription gating, and zone-based shipping—up to the cart and checkout boundary.',
+      solution:
+        'Built an event-driven Next.js + Node.js/Express + PostgreSQL/Prisma system with Redis caching, RabbitMQ background workers, AWS S3 presigned uploads with Sharp processing, and strict API/UI subscription enforcement.',
+      architecture:
+        'Next.js (Redux Toolkit + TanStack Query + Zod) <-> Node.js / Express REST APIs + Socket.IO <-> PostgreSQL (Prisma, 30+ Models) + Redis + RabbitMQ + AWS S3.',
+    },
+    architectureDetails: {
+      frontend: [
+        'Next.js, React, TypeScript & Tailwind CSS across Storefront, Seller Dashboard, and Admin Panel',
+        'Redux Toolkit & TanStack Query for persistent multi-seller cart state and server-state caching',
+        'React Hook Form with Zod schemas for strict multi-step KYC and product variant validation',
+        'Google OAuth 2.0 authentication and Socket.IO real-time event updates',
+      ],
+      backend: [
+        'Node.js & Express REST APIs (20+ endpoint groups) with PostgreSQL and Prisma ORM (30+ models)',
+        'AWS S3 presigned uploads with Sharp image optimization pipeline',
+        'RabbitMQ topic exchange decoupling notifications, SMS dispatching, and subscription lifecycle jobs',
+        'Redis caching and Dockerized deployment architecture',
+      ],
+    },
+    engineeringHighlights: [
+      {
+        title: '1. Structured Seller Onboarding with KYC',
+        points: [
+          'Aspiring sellers register their brand, upload National ID or Trade License documents via AWS S3 presigned URLs, and complete a step-by-step verification flow.',
+          'Admin review and approval workflow gates merchant dashboard access until verification passes.',
+        ],
+      },
+      {
+        title: '2. Multi-Vendor Catalog, Variants & Persistent Cart',
+        points: [
+          'Built full product and variant management (size, color, stock, pricing) for sellers alongside a multi-store browsing experience for customers.',
+          'Implemented persistent multi-seller cart state ahead of the order-splitting and checkout pipeline.',
+        ],
+      },
+      {
+        title: '3. Subscription-Gated Feature Access',
+        points: [
+          'Sellers choose from Base and Add-on plans unlocking higher product limits, flash sale access, and branding features.',
+          'Plan entitlements are enforced consistently at both the Express API middleware and Next.js UI layers.',
+        ],
+      },
+      {
+        title: '4. Event-Driven Backend, Zone Shipping & Flash Deals',
+        points: [
+          'RabbitMQ topic exchange decouples notifications, SMS dispatching, and subscription jobs from HTTP requests.',
+          'Configured custom seller shipping rates across 3 geographic zones with weight-based pricing and live-countdown flash deals.',
+        ],
+      },
+    ],
+    impactMetrics: [
+      { metric: 'Database Schema Scale', before: 'Single-store concept', after: '30+ Relational Models', improvement: 'Full Multi-Vendor Data Model' },
+      { metric: 'Role Architecture', before: 'No tenant isolation', after: '3-Tier RBAC', improvement: 'Customer, Seller & Admin' },
+      { metric: 'API Surface', before: 'Greenfield', after: '20+ Endpoint Groups', improvement: 'Modular & Event-Driven' },
+    ],
+    standoutPoints: [
+      {
+        title: 'Unified 3-Tier Codebase',
+        detail: 'Storefront, Seller Dashboard, and Admin Panel engineered cleanly within a single cohesive architecture.',
+      },
+      {
+        title: 'Production Media & Queue Pipeline',
+        detail: 'AWS S3 presigned uploads + Sharp image processing + RabbitMQ workers keep API responses fast under load.',
+      },
+      {
+        title: 'Clear Scope Ownership',
+        detail: 'Architected and delivered the entire pre-order marketplace foundation—KYC, catalog, variants, shipping, flash deals, and subscriptions.',
+      },
+    ],
   },
   {
     id: 'admission-warrior',
-    title: 'Admission Warrior',
+    title: 'Admission Warriors',
+    subtitle: 'High-Concurrency EdTech LMS, Automated SMS Payment Verification & Distraction-Free Classroom',
     category: 'EdTech',
-    description: 'A premium online LMS for board & admission examinees featuring custom distraction-free Plyr.js video streaming, automated BulkSMSBD + Redis TTL OTP authentication, PostgreSQL on Neon DB, AWS S3 storage, and dynamic key-rebound DOM crash prevention.',
+    description:
+      'A high-concurrency e-learning platform engineered for HSC examinees and university admission seekers (DU, JU, RU, Medical, Engineering) across Bangladesh—featuring a distraction-free Plyr.js classroom, zero-merchant-cost SMS payment reconciliation, and mobile-first ergonomics.',
     liveUrl: 'https://admissionwarrior.com',
-    stack: ['Next.js 16 (App Router)', 'React 19', 'Node.js', 'Express', 'TypeScript', 'PostgreSQL (Neon DB)', 'Prisma ORM', 'Redis', 'AWS S3', 'Plyr.js', 'BulkSMSBD API'],
-    highlights: ['Distraction-Free Plyr.js Player', 'BulkSMSBD + Redis TTL OTP', 'React & Plyr DOM Crash Fix', 'Neon DB & AWS S3 Storage'],
-    metrics: 'Zero-Crash Video LMS',
+    image: '/projects/admission-warrior.jpg',
+    stack: [
+      'Next.js 16',
+      'React 19',
+      'TypeScript',
+      'Tailwind CSS',
+      'Framer Motion',
+      'Node.js',
+      'Express.js',
+      'PostgreSQL',
+      'Prisma',
+      'Redis',
+      'Plyr.js',
+      'BulkSMSBD API',
+    ],
+    highlights: [
+      'Distraction-Free Plyr.js Video Classroom',
+      'Sub-3s Automated SMS Payment Reconciliation',
+      '1-Click Free Course Enrollment & Redis OTP',
+      'Mobile-First Viewport & In-App Browser Guard',
+    ],
+    metrics: '< 3s Payment Activation',
     iconName: 'GraduationCap',
+    scope: {
+      role: 'Full-Stack Software Engineer & System Architect',
+      timeline: 'Production-Deployed',
+      targetUsers: 'HSC Examinees & University Admission Seekers (DU, JU, RU, Medical, Engineering)',
+      platforms: 'Mobile-First Web LMS, Student Dashboard & Admin Course Portal',
+    },
+    problems: [
+      {
+        title: 'Third-Party Video Distractions',
+        detail:
+          'Standard embedded YouTube players expose external video recommendations and share links, breaking student focus during high-stakes exam prep.',
+      },
+      {
+        title: 'High Payment Gateway Overhead',
+        detail:
+          'Commercial merchant gateways impose heavy fees and slow approvals, while manual bKash/Nagad SMS verification caused hours-long enrollment delays.',
+      },
+      {
+        title: 'Fragile Mobile Viewing Experience',
+        detail:
+          'Over 85% of students access courses on smartphones, where rigid desktop aspect ratios clipped exam/note buttons and Facebook in-app browsers dropped auth sessions.',
+      },
+    ],
     caseStudy: {
-      challenge: 'Preventing YouTube title/avatar click-through distractions during lecture streaming, resolving fatal React vs Plyr.js `removeChild` DOM unmount crashes, preventing mobile layout clipping on non-video cards, and managing high-priority mobile OTPs.',
-      solution: 'Decoupled frontend (Next.js 16/React 19) from Express/TypeScript backend. Integrated Plyr.js with absolute overlay pointers, solved DOM unmount crashes via dynamic `key={videoId}` re-mounting, engineered conditional mobile viewport min-heights, and stored Redis TTL OTP keys with BulkSMSBD API.',
-      architecture: 'Next.js 16 App Router (Client/Server Hydration) + Express Node.js API + PostgreSQL on Neon DB + Prisma ORM + Redis Session/OTP Store + AWS S3 Storage.',
-      keyTechnicalFeatures: [
-        'Distraction-Free Plyr.js Media Player: Custom dynamic Plyr.js wrapper (ssr: false) with absolute overlay pointer-event masking to block YouTube avatar & title click-throughs',
-        'Solved React & Plyr.js DOM `removeChild` Fatal Crash: Bound dynamic React `key={videoId}` and `suppressHydrationWarning` to force clean re-mounting when switching lectures without DOM unmount exceptions',
-        'Secure Mobile OTP Auth (BulkSMSBD API + Redis TTL): Integrated BulkSMSBD gateway with Redis high-speed TTL keys (`otp:phone:NUMBER`) expiring in 5 minutes',
-        'Mobile Viewport Layout Clipping Fix: Conditional aspect-ratio engine (`contentType === "VIDEO" ? "aspect-video" : "min-h-[260px] sm:aspect-video"`) eliminating mobile card truncation',
-        'Dynamic Curriculum Preview Modal Drawer: Instant backdrop overlay popup for free demo video lectures (`isFree: true`) without breaking user flow',
-        'Expandable Mobile Header Search Engine: Contextual slide-down search bar with mobile touch "খুঁজুন" trigger maximizing active screen area',
+      challenge:
+        'Delivering a distraction-free React 19 video classroom without DOM reconciliation crashes, paired with instant zero-fee bKash/Nagad payment verification and reliable mobile access.',
+      solution:
+        'Built an isolated Plyr.js classroom with pointer shields, an automated Android SMS webhook + regex reconciliation engine inside atomic Prisma transactions, Redis-backed OTP rate limiting, and Facebook in-app browser detection.',
+      architecture:
+        'Next.js 16 (App Router, React 19, Tailwind CSS, Plyr.js) <-> Node.js / Express.js REST APIs + SMS Webhook <-> PostgreSQL (Neon DB, Prisma) + Redis + BulkSMSBD.',
+    },
+    architectureDetails: {
+      frontend: [
+        'Next.js 16 App Router & React 19 with Server Components for SEO-optimized course landing pages',
+        'Tailwind CSS & Framer Motion mobile-first UI with content-aware wrappers preventing clipping on <640px screens',
+        'Isolated Plyr.js video classroom with pointer-blocking shields and dedicated 10s rewind/forward controls',
+        'Facebook in-app webview detector guiding users to open in Chrome/Safari to preserve auth cookies',
+      ],
+      backend: [
+        'Node.js & Express.js REST APIs handling high-concurrency webhooks and enrollments',
+        'Serverless PostgreSQL (Neon DB) with Prisma ORM for ACID-compliant atomic payment matching',
+        'Redis in-memory store for 5-minute TTL OTP verification and API rate limiting',
+        'BulkSMSBD API integration for reliable cellular OTP delivery',
       ],
     },
+    engineeringHighlights: [
+      {
+        title: '1. Distraction-Free Classroom & React 19 DOM Isolation',
+        points: [
+          'Added a transparent pointer-blocking shield over YouTube title/share areas while keeping custom playback controls intact.',
+          'Isolated the Plyr instance with dynamic keys and hydration boundaries to eliminate React 19 removeChild DOM crashes during rapid lecture switching.',
+        ],
+      },
+      {
+        title: '2. Zero-Merchant-Cost Automated Payment Verification',
+        points: [
+          'Built a real-time SMS webhook endpoint capturing forwarded bKash/Nagad SMS receipts and extracting payment method, amount, and TrxID via regex.',
+          'Atomic Prisma database transactions verify unused TrxIDs and activate student course enrollments in under 3 seconds.',
+        ],
+      },
+      {
+        title: '3. Frictionless Free Enrollment & Mobile Ergonomics',
+        points: [
+          'Free (৳0) courses bypass checkout entirely via a 1-click enrollment endpoint and redirect straight to My Courses.',
+          'Removed rigid aspect locks on exams/PDF notes and hid redundant mobile volume sliders to maximize seek timeline space.',
+        ],
+      },
+      {
+        title: '4. Granular Admin Draft & Course Control',
+        points: [
+          'Unified course service enforces active-only visibility on public pages while allowing admins to preview and toggle draft courses in the dashboard.',
+        ],
+      },
+    ],
+    impactMetrics: [
+      { metric: 'Payment Activation Time', before: 'Hours (manual check)', after: '< 3 seconds', improvement: 'Zero Manual Delay' },
+      { metric: 'Course Engagement', before: 'YouTube drop-offs', after: '+35% Increase', improvement: 'Distraction-Free Focus' },
+      { metric: 'Mobile Viewport Stability', before: 'Clipped exam/note buttons', after: '100% Responsive', improvement: '20+ Viewports Verified' },
+      { metric: 'Lecture Switching Stability', before: 'DOM removeChild crashes', after: 'Zero crashes', improvement: 'Key-Isolated Mounting' },
+    ],
+    standoutPoints: [
+      {
+        title: 'Lean FinTech Automation',
+        detail: 'Replaced expensive merchant gateway overhead with SMS pattern extraction and atomic database transactions.',
+      },
+      {
+        title: 'React 19 Stability',
+        detail: 'Solved third-party media player DOM mutation conflicts cleanly using key-based remount isolation.',
+      },
+      {
+        title: 'Built for Bangladeshi Mobile Users',
+        detail: 'Addressed real-world constraints including Facebook in-app webview session drops and small-screen control ergonomics.',
+      },
+    ],
   },
   {
     id: 'masud-physics',
     title: 'Masud Physics',
+    subtitle: 'Full-Stack Hybrid EdTech LMS with AI-Assisted STEM Assessments, Redis Anti-Piracy & Automated Tuition Billing',
     category: 'EdTech',
-    description: 'A premium, feature-rich Learning Management System (LMS) designed for HSC and admission-seeking physics students, featuring 100% automated shurjoPay/bKash billing, real-time video progress tracking, Sharp image compression on Cloudflare R2, KaTeX math equation rendering, and session-based device limits.',
+    description:
+      'A production-grade, Bengali-first Hybrid EdTech LMS & PWA unifying online video courses, offline physical coaching batches, KaTeX/MathLive STEM exams, dual payment gateways (bKash & ShurjoPay), and automated recurring monthly tuition billing.',
     liveUrl: 'https://masud-physics.com',
-    stack: ['Next.js 16 (App Router)', 'TypeScript', 'Node.js', 'PostgreSQL', 'Prisma ORM', 'Cloudflare R2', 'shurjoPay API', 'bKash API', 'Sharp', 'KaTeX/LaTeX'],
-    highlights: ['100% Automated Billing', 'Cloudflare R2 & Sharp Compression', 'KaTeX Math Equations', 'Active Device Limit Control'],
-    metrics: '95% Less Admin Overhead',
+    stack: [
+      'Next.js 16',
+      'React 19',
+      'TypeScript',
+      'Tailwind CSS',
+      'Express 5',
+      'PostgreSQL',
+      'Prisma',
+      'Redis',
+      'Gemini AI',
+      'bKash',
+      'ShurjoPay',
+      'HLS.js',
+      'KaTeX',
+      'AWS S3',
+      'GitHub Actions',
+    ],
+    highlights: [
+      'AI Bulk Question Parser (Gemini AI) & KaTeX/MathLive',
+      'Redis Single-Device Anti-Piracy Enforcement',
+      'bKash & ShurjoPay Dual Gateways + Monthly Billing Sync',
+      'Zero-Downtime PM2 & GitHub Actions VPS CI/CD',
+    ],
+    metrics: '27+ DB Models • 18 API Modules',
     iconName: 'BookOpen',
+    scope: {
+      role: 'Full-Stack Software Engineer (Architecture, Backend, Frontend & DevOps)',
+      timeline: 'Production-Deployed SaaS / Hybrid LMS',
+      targetUsers: 'Online, Offline & Hybrid Physics Students, Teachers & Coaching Administrators',
+      platforms: 'Next.js Web App, PWA, Teacher Grading Workspace & Admin Portal',
+    },
+    problems: [
+      {
+        title: 'Fragmented Hybrid Coaching Operations',
+        detail:
+          'Managing online courses, offline physical batches, and hybrid students across separate spreadsheets and tools caused enrollment mismatches and revenue leakage.',
+      },
+      {
+        title: 'Account Sharing & Content Piracy',
+        detail:
+          'Students frequently shared credentials across multiple devices, reducing paid course conversions.',
+      },
+      {
+        title: 'Complex STEM Assessments & Manual Billing',
+        detail:
+          'Physics exams required LaTeX formula authoring, auto-graded MCQs, handwritten CQ PDF grading, and offline mark merging—alongside recurring monthly tuition tracking.',
+      },
+    ],
     caseStudy: {
-      challenge: 'Handling manual billing activations for thousands of monthly/direct subscription students, preventing 48MP camera photo upload failures, protecting accounts against multi-device sharing, and rendering complex physics KaTeX equations without page lag.',
-      solution: 'Integrated shurjoPay & bKash Merchant APIs with automated cron jobs for monthly billing, built a Sharp image compression pipeline converting raw photos to WebP on Cloudflare R2 (97% size reduction), implemented refresh token device limit tracking, and client progress timestamp persistence.',
-      architecture: 'Next.js 16 App Router + Server Actions + PostgreSQL Database + Prisma ORM + Cloudflare R2 Storage + shurjoPay/bKash Payment Gateways + Sharp Engine + KaTeX Renderer.',
-      keyTechnicalFeatures: [
-        '100% Automated Billing & Cron Reminders: Integrated shurjoPay & bKash Merchant APIs with automated 15th/21st monthly cron jobs for instant invoice generation & overdue enrollment suspension',
-        'Real-Time Video Progress Saver & Resume Prompt: Tracks video timestamps with dynamic single-click "Resume Last Watched" prompts when entering course pages',
-        'Sharp Image Compression on Cloudflare R2: Server Action FormData pipeline compressing 48MP/HEIC camera photos into optimized WebP formats on R2 (avatar size reduced from 8MB to <200KB - 97% reduction)',
-        'KaTeX/LaTeX Mathematical Equation Rendering: High-performance client-side physics equation rendering without page layout shifts',
-        'Secure OTP Auth & Active Device Limit Control: 5-minute OTP expiration timer with active refresh token device tracking to block multi-student account sharing',
-        'Multi-Tiered Curriculum Navigation UX: Chapter ➔ Section ➔ Sub-section accordion navigation rendering dynamic elements on click to eliminate visual clutter',
+      challenge:
+        'Unifying online/offline/hybrid coaching workflows, tamper-resistant STEM exams with LaTeX equations, strict single-device anti-piracy, and recurring monthly billing on a cost-effective self-hosted VPS.',
+      solution:
+        'Built a decoupled Next.js 16 + Express 5 + PostgreSQL (Prisma, 27+ models) platform with Redis single-device session eviction, Gemini AI bulk question parsing, KaTeX/MathLive rendering, bKash & ShurjoPay billing sync, and zero-downtime GitHub Actions PM2 deployments.',
+      architecture:
+        'Next.js 16 (React 19, PWA, HLS.js, KaTeX/MathLive) <-> Express 5 + TypeScript (18 API Modules) <-> PostgreSQL (Prisma 7, 27+ Models) + Redis + AWS S3 (Sharp WebP) + Gemini AI.',
+    },
+    architectureDetails: {
+      frontend: [
+        'Next.js 16 App Router, React 19, TypeScript, Tailwind CSS v4, Shadcn/Radix UI & PWA support',
+        'MathLive interactive equation authoring + KaTeX rendering for Physics exams and printable PDFs',
+        'Adaptive HLS.js video playback with persistent per-student WatchProgress tracking',
+        'Dedicated teacher PDF grading workspace, printable exam papers, and batch transcript generator',
+      ],
+      backend: [
+        'Node.js & Express 5 TypeScript REST API across 18 modules with Zod validation and node-cron',
+        'PostgreSQL with Prisma ORM 7 (27+ relational models) and Redis (ioredis) session/device control',
+        'Google Gemini AI bulk question parser, AWS S3 SDK + Sharp on-the-fly WebP compression',
+        'bKash & ShurjoPay dual payment gateways + GitHub Actions SSH CI/CD with PM2 zero-downtime reload',
       ],
     },
+    engineeringHighlights: [
+      {
+        title: '1. End-to-End Hybrid STEM Exam Engine & AI Question Parser',
+        points: [
+          'Built a centralized Question Bank supporting MCQ, CQ, and Short questions with MathLive formula input and KaTeX rendering.',
+          'Integrated Google Gemini AI bulk parsing so teachers can paste raw text and generate structured Question Bank entries automatically.',
+          'Enforced server-side startTime/endTime in PostgreSQL with idempotent auto-save and auto-submit to prevent timer manipulation, plus instant MCQ grading and teacher PDF script evaluation.',
+        ],
+      },
+      {
+        title: '2. Redis Single-Device Anti-Piracy & Media Pipeline',
+        points: [
+          'Engineered DeviceLimitService backed by Redis Sets to enforce a strict 1-device-per-student policy, evicting prior sessions on new login without PostgreSQL overhead.',
+          'Secured auth with httpOnly/Secure/SameSite JWT cookies and built an automated Sharp WebP compression pipeline to S3 storage.',
+        ],
+      },
+      {
+        title: '3. Dual Payment Gateways & Automated Monthly Tuition Sync',
+        points: [
+          'Integrated bKash and ShurjoPay with callback verification, transaction auditing, and a Failed Transactions recovery dashboard.',
+          'Built a transactional monthly billing sync engine that backfills 1st-of-month invoices for offline/hybrid batches, ignores abandoned attempts, and auto-suspends overdue accounts until paid.',
+        ],
+      },
+      {
+        title: '4. Zero-Downtime Self-Hosted VPS CI/CD',
+        points: [
+          'Solved VPS out-of-memory Next.js builds via tuned GitHub Actions SSH pipelines (NODE_OPTIONS memory cap, safe Prisma schema sync, and zero-downtime pm2 reload).',
+        ],
+      },
+    ],
+    impactMetrics: [
+      { metric: 'Backend & Data Scale', before: 'Fragmented spreadsheets', after: '27+ Models • 18 APIs', improvement: 'Unified Hybrid Platform' },
+      { metric: 'Account Sharing Prevention', before: 'Unlimited logins', after: '1 Active Device', improvement: 'Redis-Enforced Anti-Piracy' },
+      { metric: 'Billing & Exam Grading', before: 'Manual tracking & checks', after: 'Automated Sync & MCQ', improvement: 'Major Admin Time Saved' },
+      { metric: 'Deployment Reliability', before: 'Manual VPS OOM crashes', after: 'GitHub Actions + PM2', improvement: 'Zero-Downtime Releases' },
+    ],
+    standoutPoints: [
+      {
+        title: 'True Hybrid SaaS Architecture',
+        detail: 'Unifies Online, Offline, and Hybrid coaching batches, recurring monthly billing, and offline+online exam marks in one system.',
+      },
+      {
+        title: 'AI + STEM Engineering Depth',
+        detail: 'Combines Gemini AI bulk question parsing with MathLive/KaTeX Physics typography and tamper-resistant exam timers.',
+      },
+      {
+        title: 'Production DevOps Mastery',
+        detail: 'Runs full-stack Next.js 16 + Express 5 + PostgreSQL + Redis reliably on self-hosted Linux VPS with automated CI/CD.',
+      },
+    ],
   },
   {
     id: 'rongbela-bd',
     title: 'Rongbela BD',
     category: 'E-Commerce',
-    description: 'A scalable modest fashion D2C e-commerce platform featuring decoupled catalog & stock tables for 120ms category loading, a unified online & POS sales ledger, dual-layer stable unique SKU auto-generation, zero-dependency client HTML5 canvas image compression, and custom Bangladeshi campus delivery workflows.',
+    description: 'A modern fashion e-commerce storefront delivering seamless product discovery, visual variants, coupon processing, and checkout.',
     liveUrl: 'https://rongbelabd.com',
-    stack: ['Next.js (App Router)', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL (Neon DB)', 'Prisma ORM', 'Cloudflare R2', 'HTML5 Canvas API', 'Tailwind CSS'],
-    highlights: ['Decoupled Stock Architecture', 'Unified E-Commerce & POS Ledger', 'HTML5 Canvas Image Compression', 'Campus Delivery Workflow'],
-    metrics: '<120ms Category Loading',
+    stack: ['React.js', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'Tailwind CSS'],
+    highlights: ['High-Conversion UI', 'Dynamic Product Variants', 'Cart & Coupon Engine', 'Admin Inventory Manager'],
+    metrics: 'High Conversion Rate',
     iconName: 'Shirt',
     caseStudy: {
-      challenge: 'High-volume concurrent stock locking during promotional sales, database P2002 SKU collision across color/size variants, inventory discrepancies between online e-commerce and offline Messenger/event POS sales, 6MB mobile photo upload timeouts, and complex Bangladeshi campus delivery address formats.',
-      solution: 'Decoupled static Product Catalog metadata from real-time Stock tables, created a Unified Sales Log Ledger combining e-commerce checkouts with an offline POS interface, engineered a dual-layer SKU auto-generator with stable UUID/random suffixes, shifted 1200px max-width image compression to client-side HTML5 Canvas (95% size reduction to 220KB), and built specialized university campus delivery workflows.',
-      architecture: 'Next.js App Router + Express Node.js API + Decoupled PostgreSQL (Neon DB) Catalog/Stock Schemas + Prisma ORM + Cloudflare R2 Storage + HTML5 Canvas Compression Engine.',
-      keyTechnicalFeatures: [
-        'Decoupled Catalog & Independent Stock Architecture: Separates static product metadata from real-time inventory count tables, enabling sub-120ms category page loads and eliminating database row locks during peak checkout spikes',
-        'Unified Sales Log Ledger & POS Offline Entry: Integrated online checkout decrements with a dedicated admin POS interface for Messenger, phone, and pop-up shop sales, establishing a single source of truth for total turnover',
-        'Stable Dual-Layer SKU Auto-Generator: Client-side generator attaching stable UUID suffixes on Add and random 4-digit suffixes (e.g. RB-BLACK-XL-3948) on Update, eliminating database P2002 SKU collision',
-        'Zero-Dependency HTML5 Canvas Image Compression: Client-side browser canvas scaling to 1200px max-width at 82% JPEG quality, shrinking 6MB camera photos to 220KB on-the-fly and cutting cloud R2 storage costs by 95%',
-        'Custom Bangladeshi Campus Delivery Workflow: Specialized shipping address flow supporting university campus deliveries (University Name, Hall Name, Room Number) alongside standard Home/Office routes',
-        'Coupon Analytics & Marketing Influencer ROI Dashboard: Real-time analytics tracking coupon code usage count, influencer promo campaign ROI, and customer margin impacts',
-      ],
+      challenge: 'Providing instant visual feedback for color/size variants while maintaining minimal payload size.',
+      solution: 'Created optimized client state management and server-side image optimization pipeline.',
+      architecture: 'React Frontend + Express REST API + Prisma ORM + PostgreSQL.',
     },
   },
   {
     id: 'willow-basket',
     title: 'Willow Basket',
     category: 'E-Commerce',
-    description: 'A boutique retail & fashion e-commerce web application featuring an in-memory Hybrid Fuzzy Search Engine (Levenshtein Distance + Bengali-English Tokenization), three-layer atomic Prisma transaction stock guards, zero-latency optimistic admin UI status badges, window.history URL debouncing, and automated GitHub Actions CI/CD to VPS with PM2.',
+    description: 'An elegant fashion e-commerce web application focused on curated collections, swift cart operations, and streamlined checkout.',
     liveUrl: 'https://willow-basket.com',
-    stack: ['Next.js 16 (App Router)', 'TypeScript', 'Node.js', 'Express v5', 'Prisma 7', 'PostgreSQL (Neon Serverless)', 'Cloudflare R2', 'PM2', 'GitHub Actions', 'Tailwind CSS'],
-    highlights: ['Hybrid Fuzzy & Bengali Search', 'Three-Layer Atomic Stock Guard', 'Optimistic UI Admin Badges', 'GitHub Actions CI/CD to VPS'],
-    metrics: 'Zero Stock Discrepancy',
+    stack: ['React.js', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS'],
+    highlights: ['Curated Collections Layout', 'Fast Checkout Flow', 'Responsive Mobile Design', 'Order Tracking'],
+    metrics: 'Production Storefront',
     iconName: 'ShoppingBasket',
     caseStudy: {
-      challenge: 'Handling customer typo searches in Bengali/English without 3rd-party search services, preventing negative stock or over-confirming during COD checkouts, resolving production search lag caused by Next.js `router.replace` server component re-execution, calculating server-side area-based shipping costs, and automating VPS CI/CD deployments.',
-      solution: 'Engineered an in-memory Hybrid Search Engine combining Prisma substring queries with Levenshtein Distance & Bengali `SYNONYM_MAP` tokenization, implemented a 3-Layer Prisma `$transaction` stock guard with Bengali error alerts & auto-restoration, replaced `router.replace` with `window.history.replaceState` for instant silent URL typing sync, and automated VPS SSH deployments via GitHub Actions + PM2.',
-      architecture: 'Next.js 16 App Router (SSR + Client UI) + Express v5 Node.js API + Prisma 7 ORM + PostgreSQL on Neon Serverless DB + Cloudflare R2 Storage + GitHub Actions CI/CD + PM2 Process Manager.',
-      keyTechnicalFeatures: [
-        'In-Memory Hybrid Fuzzy Search Engine: Two-layer search pipeline combining Prisma PostgreSQL substring queries with Levenshtein Distance edit scoring, prefix match bonuses, and a custom Bengali-English phonetic `SYNONYM_MAP` (zero external search dependencies)',
-        'Three-Layer Atomic Stock Management Guard: Prisma `$transaction` guard enforcing pre-check validation with descriptive Bengali stock error toasts (`❌ "Cotton Romper" এর পর্যাপ্ত স্টক নেই...`), atomic deduction on confirmation, auto-restoration on cancellation, and low-stock warning alerts (≤5 remaining)',
-        'Production Search Lag Fix (`window.history.replaceState`): Solved production search latency by replacing Next.js `router.replace()` with `window.history.replaceState()` for live debounced URL bar updates without re-triggering Next.js server components',
-        'Optimistic Admin UI Status Callbacks: Implemented `onStatusUpdated(orderId, newStatus)` callbacks propagating instant Badge UI updates without requiring page reloads or `router.refresh()`',
-        'Area-Based Server-Calculated Shipping Engine: Server-side calculation resolving DB-driven district areas to zone types (`INSIDE_DHAKA`, `DHAKA_SUBURBS`, `OUTSIDE_DHAKA`), overriding client-sent costs inside Prisma transactions',
-        'Automated GitHub Actions CI/CD Pipeline: Seamless `git push origin naim-dev` workflow triggering SSH deployment to VPS, Prisma migrations, asset compilation, and zero-downtime PM2 server restarts',
-      ],
+      challenge: 'Ensuring seamless shopping experience on low-bandwidth mobile networks.',
+      solution: 'Utilized aggressive static assets caching, lazy loading, and minimal payload API responses.',
+      architecture: 'React Single Page App + Node REST API + MongoDB Cloud.',
     },
   },
   {
@@ -177,14 +640,9 @@ export const PRODUCTION_APPS: ProductionApp[] = [
     metrics: 'High-Traffic News Portal',
     iconName: 'Newspaper',
     caseStudy: {
-      challenge: 'Optimizing high-volume news articles for Google search indexability while managing fast editorial publishing workflows.',
-      solution: 'Leveraged Next.js Dynamic SSR & Incremental Static Revalidation (ISR) for instant search indexing and Cloudflare CDN caching.',
-      architecture: 'Next.js ISR + Node.js API + PostgreSQL + Prisma ORM + Cloudflare CDN.',
-      keyTechnicalFeatures: [
-        'Incremental Static Revalidation (ISR) for instant news publishing',
-        'Google News SEO Optimization & OpenGraph Social Sharing',
-        'Editorial CMS Dashboard for Article & Media Management',
-      ],
+      challenge: 'Optimizing news articles for search engines while managing dynamic editorial content publishing.',
+      solution: 'Leveraged Next.js Dynamic Route SSR & Incremental Static Revalidation (ISR) for instant search indexing.',
+      architecture: 'Next.js ISR + PostgreSQL + Prisma ORM + Cloudflare CDN.',
     },
   },
   {
@@ -193,19 +651,14 @@ export const PRODUCTION_APPS: ProductionApp[] = [
     category: 'NGO',
     description: 'An official corporate web portal for Resource Development Foundation (RDF), showcasing social impact initiatives, donor transparency, and news.',
     liveUrl: 'https://rdfbd.org',
-    stack: ['React.js', 'Node.js', 'Express', 'MongoDB', 'Mongoose', 'cPanel Hosting', 'Tailwind CSS'],
-    highlights: ['Social Impact Showcase', 'Interactive Project Gallery', 'Donor & News Portal', 'cPanel Hosted'],
+    stack: ['React.js', 'Node.js', 'Express', 'PostgreSQL', 'Tailwind CSS'],
+    highlights: ['Social Impact Showcase', 'Interactive Project Gallery', 'Donor & News Portal', 'Corporate UI/UX'],
     metrics: 'Official NGO Portal',
     iconName: 'HeartHandshake',
     caseStudy: {
-      challenge: 'Communicating NGO achievements, project metrics, financial transparency, and donor reports with reliable 99.9% uptime on cPanel web hosting infrastructure.',
-      solution: 'Built a responsive React single-page portal backed by Node.js/Express APIs with MongoDB database storage, deployed seamlessly on cPanel shared hosting.',
-      architecture: 'React Frontend + Express Node.js API + MongoDB Database + cPanel Web Server Hosting.',
-      keyTechnicalFeatures: [
-        'Interactive Social Impact & Project Gallery Showcase with responsive image grid layout',
-        'Donor Transparency & News Publishing Hub backed by MongoDB data pipelines',
-        'cPanel Web Hosting Deployment configured with Node.js Passenger application manager for high availability',
-      ],
+      challenge: 'Communicating NGO achievements and project metrics with maximum trust and accessibility.',
+      solution: 'Designed clean corporate typography, semantic HTML structure, and fast responsive media galleries.',
+      architecture: 'React Frontend + Express API + PostgreSQL + Cloudflare VPS host.',
     },
   },
 ];
@@ -262,46 +715,18 @@ export const TECHNICAL_SKILLS = [
   },
   {
     category: 'Frontend Engineering',
-    skills: ['React.js', 'Next.js 16 (App Router)', 'Tailwind CSS', 'Redux / Context API', 'HTML5 Canvas API', 'Plyr.js Player', 'Framer Motion', 'Responsive UI/UX'],
+    skills: ['React.js', 'Next.js (App Router)', 'Tailwind CSS', 'Redux / Context API', 'Responsive UI/UX', 'Glassmorphism Design'],
   },
   {
     category: 'Backend & APIs',
-    skills: ['Node.js', 'Express.js v5', 'RESTful APIs', 'Server Actions', 'RabbitMQ', 'shurjoPay / bKash APIs', 'BulkSMSBD API', 'JWT Authentication', 'Socket.IO', 'FastAPI'],
+    skills: ['Node.js', 'Express.js', 'RESTful APIs', 'JWT Authentication', 'Socket.IO (Real-Time)', 'FastAPI (Learning)'],
   },
   {
-    category: 'Databases & Storage',
-    skills: ['PostgreSQL (Neon DB)', 'MongoDB', 'Mongoose', 'Prisma 7 ORM', 'Cloudflare R2', 'AWS S3', 'Redis Store'],
+    category: 'Databases & ORM',
+    skills: ['PostgreSQL', 'Prisma ORM', 'MongoDB', 'Mongoose', 'Database Indexing & Schema Design'],
   },
   {
     category: 'DevOps & Tools',
-    skills: ['Git / GitHub', 'GitHub Actions CI/CD', 'PM2 Manager', 'cPanel Hosting', 'Postman API Testing', 'Cloudflare', 'Vercel Deployment', 'Linux VPS Server Management'],
-  },
-  
-];
-
-export const CLIENT_PAIN_POINTS = [
-  {
-    icon: 'Zap',
-    title: '8+ Production-Grade Web Apps',
-    description: 'Delivered 8+ live web products across E-Commerce, EdTech, NGO & News using React, Next.js & Node.js with 100% on-time deployment.',
-    tag: 'Next.js & Full-Stack',
-  },
-  {
-    icon: 'Radio',
-    title: 'Real-Time Systems & Socket.IO',
-    description: 'Architecting dynamic real-time tracking, live location mapping, multi-role dashboards, and low-latency WebSocket communication pipelines.',
-    tag: 'WebSockets & Live Data',
-  },
-  {
-    icon: 'Server',
-    title: 'Scalable Databases & REST APIs',
-    description: 'Designing relational PostgreSQL & MongoDB schemas with Prisma ORM, cPanel hosting & VPS management, Cloudflare R2, Redis stores, RabbitMQ queues, and payment APIs.',
-    tag: 'MongoDB & cPanel Hosting',
-  },
-  {
-    icon: 'Brain',
-    title: 'CS Rigor & Next-Gen AI R&D',
-    description: 'B.Sc. in ICT at JU, 50+ LeetCode algorithmic problems solved, and actively exploring Python, FastAPI & RAG AI pipelines.',
-    tag: 'Algorithms & AI R&D',
+    skills: ['Git / GitHub', 'Postman API Testing', 'Cloudflare', 'Vercel Deployment', 'Linux VPS Server Management'],
   },
 ];

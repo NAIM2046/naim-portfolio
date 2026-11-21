@@ -1,165 +1,178 @@
-"use client";
-
-import {
-  Building2,
-  GraduationCap,
-  Trophy,
-  ExternalLink,
-  CheckCircle,
-} from "lucide-react";
-import { PERSONAL_INFO } from "@/data/portfolioData";
+import { Building2, GraduationCap, Trophy, ExternalLink, CheckCircle, Briefcase } from 'lucide-react';
+import { PERSONAL_INFO } from '@/data/portfolioData';
 
 export default function Experience() {
+  const internships = [
+    {
+      role: 'Software Engineer Intern',
+      company: 'Bangladesh Research & Education Network (BdREN)',
+      period: 'Sep 2026 – Present',
+      mode: 'Dhaka • Hybrid',
+    },
+    {
+      role: 'Software Engineer Intern',
+      company: 'TechKnowGram Limited',
+      period: 'Aug 2026 – Present',
+      mode: 'Dhaka • Hybrid',
+    },
+  ];
+
+  const agencyHighlights = [
+    'Co-founded software agency delivering custom web applications for global clients.',
+    'Shipped 8+ production web applications across EdTech, E-Commerce, NGO, and News sectors.',
+    'Architected REST APIs, JWT authentication, admin panels, and PostgreSQL schemas.',
+  ];
+
+  const profiles = [
+    {
+      name: 'LeetCode',
+      handle: 'Handle: NAIM1111 (50+ Solved)',
+      url: PERSONAL_INFO.leetcode,
+    },
+    {
+      name: 'Codeforces',
+      handle: 'Handle: naim_2046',
+      url: PERSONAL_INFO.codeforces,
+    },
+    {
+      name: 'CodeChef',
+      handle: 'Handle: naim2046',
+      url: PERSONAL_INFO.codechef,
+    },
+  ];
+
   return (
-    <section id="experience" className="py-24 relative">
+    <section id="experience" className="py-16 sm:py-24 bg-white border-b border-slate-200/90">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3 mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold">
-            <span>Career Roadmap</span>
+        <div className="max-w-2xl space-y-2.5 mb-12">
+          <div className="inline-flex items-center px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200/80">
+            Background
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Experience &{" "}
-            <span className="accent-text-gradient">Academic Background</span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight">
+            Experience &amp; <span className="text-blue-600">Education</span>
           </h2>
-          <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
-            Co-Founding a software agency, academic rigor at Jahangirnagar
-            University, and active competitive programming.
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            Software engineering internships, agency leadership, and academic foundation in ICT.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Work Experience */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="p-7 rounded-3xl glass-panel space-y-6">
-              {/* Card Header */}
-              <div className="flex items-start justify-between border-b border-white/10 pb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">
-                    <Building2 className="w-6 h-6 text-cyan-400" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          {/* Left Column: Work Experience (Internships + Agency) */}
+          <div className="lg:col-span-7 space-y-5">
+            {/* Internships */}
+            {internships.map((item) => (
+              <div key={item.company} className="p-6 rounded-xl surface-card surface-card-interactive">
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div className="flex items-start gap-3 min-w-0">
+                    <div className="w-11 h-11 rounded-lg bg-blue-50 border border-blue-200/80 flex items-center justify-center shrink-0">
+                      <Briefcase className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900">
+                        {item.role}
+                      </h3>
+                      <p className="text-sm font-semibold text-blue-600">
+                        {item.company}
+                      </p>
+                      <p className="text-xs text-slate-500 mt-1">
+                        {item.period} • {item.mode}
+                      </p>
+                    </div>
+                  </div>
+                  <span className="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200/80 shrink-0">
+                    Internship
+                  </span>
+                </div>
+              </div>
+            ))}
+
+            {/* Co-Founder Role */}
+            <div className="p-6 sm:p-7 rounded-xl surface-card space-y-5">
+              <div className="flex flex-wrap items-start justify-between gap-4 border-b border-slate-200/80 pb-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-11 h-11 rounded-lg bg-blue-50 border border-blue-200/80 flex items-center justify-center shrink-0">
+                    <Building2 className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white">
-                      Co-Founder & Full-Stack Developer
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900">
+                      Co-Founder &amp; Full-Stack Web Developer
                     </h3>
-                    <p className="text-xs text-cyan-400 font-semibold">
-                      Nexovate Labs • 2025 – Present
+                    <p className="text-sm font-semibold text-blue-600">
+                      Nexovate Labs
+                    </p>
+                    <p className="text-xs text-slate-500 mt-1">
+                      Mar 2025 – Present • Dhaka • On-site
                     </p>
                   </div>
                 </div>
-                <span className="px-3 py-1 rounded-full text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30">
+                <span className="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 border border-emerald-200/80 shrink-0">
                   Agency Lead
                 </span>
               </div>
 
-              {/* Responsibilities list */}
-              <ul className="space-y-3">
-                {[
-                  "Co-founded software development agency delivering custom web solutions for global clients.",
-                  "Developed and deployed 8+ production web applications across EdTech, E-commerce, NGO, and News sectors.",
-                  "Architected REST APIs, JWT authentication, custom admin control panels, and optimized PostgreSQL database schemas.",
-                  "Direct client interaction from initial requirement gathering to production cloud/VPS deployment.",
-                ].map((item, idx) => (
-                  <li
-                    key={idx}
-                    className="flex items-start gap-3 text-xs text-gray-300 leading-relaxed"
-                  >
-                    <CheckCircle className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
+              <ul className="space-y-2.5">
+                {agencyHighlights.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                    <CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
+          </div>
 
+          {/* Right Column: Education & Competitive Programming */}
+          <div className="lg:col-span-5 space-y-6">
             {/* Education Card */}
-            <div className="p-7 rounded-3xl glass-panel space-y-4">
-              <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-                <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center">
-                  <GraduationCap className="w-6 h-6 text-purple-400" />
+            <div className="p-6 rounded-xl surface-card space-y-4">
+              <div className="flex items-center gap-3 border-b border-slate-200/80 pb-4">
+                <div className="w-11 h-11 rounded-lg bg-blue-50 border border-blue-200/80 flex items-center justify-center shrink-0">
+                  <GraduationCap className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white">
+                  <h3 className="text-base font-bold text-slate-900">
                     {PERSONAL_INFO.education.degree}
                   </h3>
-                  <p className="text-xs text-purple-300 font-semibold">
+                  <p className="text-xs text-slate-600 font-medium">
                     {PERSONAL_INFO.education.institution}
                   </p>
                 </div>
               </div>
-              <p className="text-xs text-gray-300 leading-relaxed">
-                Focusing on Information & Communication Technology, Algorithm
-                Analysis, Software Engineering Principles, and Scalable Systems.
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Focusing on Information &amp; Communication Technology, Algorithm Analysis, Software Engineering Principles, and Scalable Systems.
               </p>
             </div>
-          </div>
 
-          {/* Competitive Programming Cards */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="p-7 rounded-3xl bg-[#0c1017] border border-white/15 shadow-2xl space-y-6">
-              <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-                <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center">
-                  <Trophy className="w-5 h-5 text-amber-400" />
+            {/* Competitive Programming Card */}
+            <div className="p-6 rounded-xl surface-card space-y-4">
+              <div className="flex items-center gap-3 border-b border-slate-200/80 pb-4">
+                <div className="w-11 h-11 rounded-lg bg-blue-50 border border-blue-200/80 flex items-center justify-center shrink-0">
+                  <Trophy className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white">
-                    Competitive Programming
-                  </h3>
-                  <p className="text-xs text-amber-300">
-                    500+ Algorithmic Problems Solved
-                  </p>
+                  <h3 className="text-base font-bold text-slate-900">Competitive Programming</h3>
+                  <p className="text-xs text-slate-600">50+ Algorithmic Problems Solved</p>
                 </div>
               </div>
 
-              <div className="space-y-3">
-                {/* LeetCode */}
-                <a
-                  href={PERSONAL_INFO.leetcode}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all flex items-center justify-between group"
-                >
-                  <div className="space-y-0.5">
-                    <p className="text-sm font-bold text-white group-hover:text-amber-400 transition-colors">
-                      LeetCode
-                    </p>
-                    <p className="text-xs text-gray-400">
-                      Handle: NAIM1111 (83+ Solved)
-                    </p>
-                  </div>
-                  <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-white" />
-                </a>
-
-                {/* Codeforces */}
-                <a
-                  href={PERSONAL_INFO.codeforces}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all flex items-center justify-between group"
-                >
-                  <div className="space-y-0.5">
-                    <p className="text-sm font-bold text-white group-hover:text-cyan-400 transition-colors">
-                      Codeforces
-                    </p>
-                    <p className="text-xs text-gray-400">Handle: naim_2046</p>
-                  </div>
-                  <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-white" />
-                </a>
-
-                {/* CodeChef */}
-                <a
-                  href={PERSONAL_INFO.codechef}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all flex items-center justify-between group"
-                >
-                  <div className="space-y-0.5">
-                    <p className="text-sm font-bold text-white group-hover:text-purple-400 transition-colors">
-                      CodeChef
-                    </p>
-                    <p className="text-xs text-gray-400">Handle: naim2046</p>
-                  </div>
-                  <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-white" />
-                </a>
+              <div className="space-y-2.5">
+                {profiles.map((profile) => (
+                  <a
+                    key={profile.name}
+                    href={profile.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3.5 min-h-[56px] rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-slate-300 transition-colors flex items-center justify-between gap-3 group"
+                  >
+                    <div className="space-y-0.5 min-w-0">
+                      <p className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                        {profile.name}
+                      </p>
+                      <p className="text-xs text-slate-600 truncate">{profile.handle}</p>
+                    </div>
+                    <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-slate-700 shrink-0" />
+                  </a>
+                ))}
               </div>
             </div>
           </div>

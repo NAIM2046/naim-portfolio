@@ -1,38 +1,29 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
+import { PRODUCTION_APPS } from '@/data/portfolioData';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://naim-portfolio.vercel.app';
+  const baseUrl = 'https://naim.nexovatelabs.com';
+
+  const projectRoutes: MetadataRoute.Sitemap = PRODUCTION_APPS.map((app) => ({
+    url: `${baseUrl}/projects/${app.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  }));
 
   return [
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 1.0,
+      changeFrequency: 'monthly',
+      priority: 1,
     },
     {
-      url: `${baseUrl}/#production-apps`,
+      url: `${baseUrl}/cv`,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: 'monthly',
       priority: 0.9,
     },
-    {
-      url: `${baseUrl}/#engineering-projects`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#skills`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/#contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
+    ...projectRoutes,
   ];
 }

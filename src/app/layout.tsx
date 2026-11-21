@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { PERSONAL_INFO } from "@/data/portfolioData";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,66 +13,32 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://naim-portfolio.vercel.app";
+const SITE_URL = "https://naim.nexovatelabs.com";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Naim Hossain | Full-Stack Web Developer & Co-Founder @ Nexovate Labs",
     template: "%s | Naim Hossain",
   },
-  description: "Official portfolio of Naim Hossain, Full-Stack Web Developer & Co-Founder at Nexovate Labs. Creator of 8+ production web applications (Elumpu, Admission Warrior, Masud Physics, Rongbela BD, Willow Basket) specializing in Next.js 16, React, Node.js, PostgreSQL, MongoDB, Socket.IO, and RabbitMQ.",
+  description:
+    "Portfolio of Naim Hossain — Full-Stack Web Developer and Co-Founder at Nexovate Labs. Building production-grade Next.js, React, Node.js, PostgreSQL, Prisma, and real-time Socket.IO web applications.",
   keywords: [
     "Naim Hossain",
-    "Full-Stack Web Developer",
-    "Nexovate Labs Co-Founder",
-    "Next.js Developer Bangladesh",
-    "React Developer Dhaka",
-    "Node.js Backend Engineer",
-    "PostgreSQL & Prisma Specialist",
-    "Elumpu E-Commerce Developer",
-    "Admission Warrior LMS",
-    "Masud Physics LMS Developer",
-    "Rongbela BD Developer",
-    "JU IIT ICT Engineer",
-    "Jahangirnagar University ICT",
-    "Socket.IO Real-Time Systems",
-    "RabbitMQ Message Queues",
-    "Full Stack Software Engineer",
+    "Naim Hossain Developer",
+    "Nexovate Labs",
+    "Full-Stack Web Developer Bangladesh",
+    "Next.js Developer",
+    "React Developer",
+    "Node.js Express Developer",
+    "PostgreSQL Prisma Developer",
+    "Jahangirnagar University IIT",
   ],
-  authors: [{ name: "Naim Hossain", url: "https://github.com/NAIM2046" }],
-  creator: "Naim Hossain",
+  authors: [{ name: PERSONAL_INFO.name, url: SITE_URL }],
+  creator: PERSONAL_INFO.name,
   publisher: "Nexovate Labs",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
   alternates: {
     canonical: "/",
-  },
-  openGraph: {
-    title: "Naim Hossain | Full-Stack Web Developer & Co-Founder @ Nexovate Labs",
-    description: "Delivering 8+ production-grade web products across E-Commerce, EdTech, NGO & News using Next.js, React, Node.js, PostgreSQL, and Socket.IO.",
-    url: siteUrl,
-    siteName: "Naim Hossain Engineering Portfolio",
-    images: [
-      {
-        url: "/naim-profile.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Naim Hossain - Full-Stack Web Developer & Co-Founder @ Nexovate Labs",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Naim Hossain | Full-Stack Web Developer & Co-Founder @ Nexovate Labs",
-    description: "Creator of 8+ production web applications (Elumpu, Admission Warrior, Masud Physics, Rongbela BD). Expert in Next.js, Node.js, PostgreSQL & Real-Time Systems.",
-    images: ["/naim-profile.jpg"],
-    creator: "@NAIM2046",
   },
   robots: {
     index: true,
@@ -84,12 +51,29 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
+  openGraph: {
+    title: "Naim Hossain | Full-Stack Web Developer & Co-Founder @ Nexovate Labs",
+    description:
+      "Production-grade web applications and real-time systems built with Next.js, React, Node.js, PostgreSQL, Prisma, and Socket.IO.",
+    url: SITE_URL,
+    siteName: "Naim Hossain Portfolio",
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "/naim-profile.jpg",
+        width: 800,
+        height: 800,
+        alt: "Naim Hossain - Full-Stack Web Developer & Co-Founder at Nexovate Labs",
+      },
     ],
-    shortcut: "/icon.svg",
-    apple: "/naim-profile.jpg",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Naim Hossain | Full-Stack Web Developer",
+    description:
+      "Full-Stack Web Developer & Co-Founder @ Nexovate Labs. Building scalable web apps with Next.js, Node.js, and PostgreSQL.",
+    images: ["/naim-profile.jpg"],
   },
 };
 
@@ -100,65 +84,74 @@ export default function RootLayout({
 }>) {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Naim Hossain",
-    "alternateName": "NAIM2046",
-    "jobTitle": "Full-Stack Web Developer & Co-Founder",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Nexovate Labs",
-      "url": "https://www.nexovatelabs.com/",
-    },
-    "alumniOf": {
-      "@type": "EducationalOrganization",
-      "name": "Jahangirnagar University",
-      "department": "Institute of Information Technology (IIT)",
-    },
-    "url": siteUrl,
-    "image": `${siteUrl}/naim-profile.jpg`,
-    "sameAs": [
-      "https://github.com/NAIM2046",
-      "https://www.linkedin.com/in/naimju/",
-      "https://leetcode.com/u/NAIM1111/",
-      "https://codeforces.com/profile/naim_2046",
-      "https://www.codechef.com/users/naim2046",
-      "https://www.nexovatelabs.com/",
-    ],
-    "email": "mailto:naim2046juiit@gmail.com",
-    "telephone": "+8801575606194",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Dhaka",
-      "addressCountry": "Bangladesh",
-    },
-    "knowsAbout": [
-      "Full-Stack Web Development",
-      "Next.js App Router",
-      "React.js",
-      "Node.js & Express",
-      "TypeScript",
-      "PostgreSQL & Prisma ORM",
-      "MongoDB & Mongoose",
-      "RabbitMQ Asynchronous Queues",
-      "Socket.IO Real-Time Systems",
-      "Python & FastAPI AI R&D",
-      "Cloudflare R2 & AWS S3 Storage",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${SITE_URL}/#person`,
+        name: PERSONAL_INFO.name,
+        url: SITE_URL,
+        image: `${SITE_URL}/naim-profile.jpg`,
+        jobTitle: "Full-Stack Web Developer & Co-Founder",
+        description: PERSONAL_INFO.bio,
+        email: `mailto:${PERSONAL_INFO.email}`,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Dhaka",
+          addressCountry: "BD",
+        },
+        worksFor: {
+          "@type": "Organization",
+          name: "Nexovate Labs",
+          url: "https://nexovatelabs.com",
+        },
+        alumniOf: {
+          "@type": "CollegeOrUniversity",
+          name: PERSONAL_INFO.education.institution,
+        },
+        knowsAbout: [
+          "Next.js",
+          "React",
+          "TypeScript",
+          "Node.js",
+          "Express.js",
+          "PostgreSQL",
+          "Prisma ORM",
+          "MongoDB",
+          "Socket.IO",
+          "FastAPI",
+        ],
+        sameAs: [
+          PERSONAL_INFO.github,
+          PERSONAL_INFO.linkedin,
+          PERSONAL_INFO.leetcode,
+          PERSONAL_INFO.codeforces,
+          PERSONAL_INFO.codechef,
+        ],
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        url: SITE_URL,
+        name: "Naim Hossain Portfolio",
+        description:
+          "Official portfolio of Naim Hossain, Full-Stack Web Developer and Co-Founder at Nexovate Labs.",
+        publisher: {
+          "@id": `${SITE_URL}/#person`,
+        },
+      },
     ],
   };
 
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <head>
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+      <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </head>
-      <body className="min-h-full flex flex-col bg-[#07090e] text-white selection:bg-cyan-500 selection:text-black">
         {children}
       </body>
     </html>

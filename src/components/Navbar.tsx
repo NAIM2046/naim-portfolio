@@ -1,162 +1,110 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Sparkles, Briefcase, ExternalLink, Menu, X, Code2 } from 'lucide-react';
-import { PERSONAL_INFO } from '@/data/portfolioData';
+import { Briefcase, Menu, X, Code2 } from 'lucide-react';
 
-interface NavbarProps {
-  currentTheme: string;
-  setTheme: (theme: string) => void;
-}
-
-export default function Navbar({ currentTheme, setTheme }: NavbarProps) {
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 12);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
     { name: 'Live Apps', href: '#production-apps' },
     { name: 'Engineering', href: '#engineering-systems' },
-    { name: 'Skills & Stack', href: '#tech-stack' },
+    { name: 'Skills', href: '#tech-stack' },
     { name: 'Experience', href: '#experience' },
     { name: 'Contact', href: '#contact' },
   ];
 
-  const themes = [
-    { id: 'cyan', color: '#06b6d4', label: 'Cyan' },
-    { id: 'violet', color: '#8b5cf6', label: 'Violet' },
-    { id: 'emerald', color: '#10b981', label: 'Emerald' },
-    { id: 'amber', color: '#f59e0b', label: 'Amber' },
-  ];
-
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 ${
         scrolled
-          ? 'py-3 bg-[#07090e]/85 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-black/50'
-          : 'py-5 bg-transparent'
+          ? 'bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-2xs'
+          : 'bg-white/80 backdrop-blur-xs border-b border-slate-200/60'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+      <nav aria-label="Primary Navigation" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-18">
           {/* Brand Logo */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-purple-600 p-[1px] shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
-              <div className="w-full h-full bg-[#07090e] rounded-[11px] flex items-center justify-center">
-                <Code2 className="w-5 h-5 text-cyan-400" />
-              </div>
+          <a href="#" className="flex items-center gap-2.5 min-h-[44px] group">
+            <div className="w-9 h-9 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+              <Code2 className="w-5 h-5 text-blue-600" />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-lg tracking-tight text-white group-hover:text-cyan-400 transition-colors">
-                  NAIM HOSSAIN
-                </span>
-                <span className="flex h-2 w-2 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-              </div>
-              <p className="text-[11px] text-gray-400 font-medium tracking-wide">
-                Co-Founder @ Nexovate Labs
-              </p>
-            </div>
+            <span className="font-bold text-base sm:text-lg tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors">
+              Naim Hossain
+            </span>
           </a>
 
           {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-gray-300 hover:text-white hover:scale-105 transition-all relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-cyan-400 hover:after:w-full after:transition-all"
+                className="px-3.5 min-h-[44px] inline-flex items-center rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
               >
                 {link.name}
               </a>
             ))}
           </div>
 
-          {/* Theme Switcher & Contact CTA */}
-          <div className="hidden lg:flex items-center gap-4">
-            {/* Color Switcher */}
-            <div className="flex items-center gap-1.5 p-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
-              {themes.map((t) => (
-                <button
-                  key={t.id}
-                  onClick={() => setTheme(t.id)}
-                  title={`Switch to ${t.label} theme`}
-                  className={`w-4 h-4 rounded-full transition-transform ${
-                    currentTheme === t.id ? 'scale-125 ring-2 ring-white' : 'hover:scale-110 opacity-70 hover:opacity-100'
-                  }`}
-                  style={{ backgroundColor: t.color }}
-                />
-              ))}
-            </div>
-
-            {/* Contact Me Button */}
+          {/* Desktop CTA */}
+          <div className="hidden md:flex items-center">
             <a
               href="#contact"
-              className="relative inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 shadow-lg shadow-emerald-500/25 transition-all hover:scale-105 active:scale-95"
+              className="inline-flex items-center gap-2 px-4 min-h-[44px] rounded-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0"
             >
-              <Briefcase className="w-3.5 h-3.5" />
+              <Briefcase className="w-4 h-4" />
               <span>Contact Me</span>
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button (44x44px minimum touch target) */}
           <button
+            type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg bg-white/5 border border-white/10 text-gray-300 hover:text-white"
+            aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={mobileMenuOpen}
+            className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg bg-slate-50 border border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
-      </div>
+      </nav>
 
       {/* Mobile Dropdown Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden mt-3 px-4 pt-3 pb-6 bg-[#0c1017]/95 backdrop-blur-2xl border-b border-white/10 space-y-3">
+        <div className="md:hidden px-4 pt-2 pb-5 bg-white border-b border-slate-200 space-y-1">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="block text-sm font-medium text-gray-300 hover:text-cyan-400 py-2 border-b border-white/5"
+              className="flex items-center min-h-[44px] px-3 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors"
             >
               {link.name}
             </a>
           ))}
-          <div className="pt-2 flex items-center justify-between">
-            <span className="text-xs text-gray-400 font-medium">Theme Accent:</span>
-            <div className="flex items-center gap-2">
-              {themes.map((t) => (
-                <button
-                  key={t.id}
-                  onClick={() => {
-                    setTheme(t.id);
-                    setMobileMenuOpen(false);
-                  }}
-                  className={`w-6 h-6 rounded-full ${currentTheme === t.id ? 'ring-2 ring-white' : ''}`}
-                  style={{ backgroundColor: t.color }}
-                />
-              ))}
-            </div>
+          <div className="pt-2">
+            <a
+              href="#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center justify-center gap-2 w-full min-h-[44px] rounded-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+            >
+              <Briefcase className="w-4 h-4" />
+              <span>Contact Me</span>
+            </a>
           </div>
-          <a
-            href="#contact"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block text-center w-full py-2.5 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-emerald-500 to-cyan-500"
-          >
-            Contact Me
-          </a>
         </div>
       )}
-    </nav>
+    </header>
   );
 }

@@ -1,240 +1,152 @@
-"use client";
-
 import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowRight,
-  CheckCircle2,
-  ShieldCheck,
-  Sparkles,
-  Terminal,
-  Zap,
-  Award,
+  FileText,
+  MapPin,
+  GraduationCap,
+  Building2,
 } from "lucide-react";
-import Link from "next/link";
+import { PERSONAL_INFO } from "@/data/portfolioData";
 
 export default function Hero() {
   const metrics = [
     {
-      label: "Live Production Web Apps",
+      label: "Production Web Apps",
       value: "8+",
-      highlight: "E-Commerce, EdTech, NGO",
+      detail: "E-Commerce, EdTech, NGO & News",
     },
     {
-      label: "Client Delivery Rate",
+      label: "On-Time Delivery",
       value: "100%",
-      highlight: "On-Time & On-Budget",
+      detail: "End-to-End Client Deployment",
     },
     {
-      label: "Competitive Programming",
-      value: "500+",
-      highlight: "LeetCode&Codeforce Solved",
-    },
-    {
-      label: "Academic Foundation",
-      value: "B.Sc ICT",
-      highlight: "Jahangirnagar University",
+      label: "Academic Track",
+      value: "B.Sc. ICT",
+      detail: "Jahangirnagar University",
     },
   ];
 
+  const coreSkills = [
+    "Next.js 16",
+    "React.js",
+    "TypeScript",
+    "Node.js",
+    "Express",
+    "PostgreSQL",
+    "Prisma",
+    "MongoDB",
+    "Socket.IO",
+  ];
+
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-      {/* Background Lighting Orbs */}
-      <div className="bg-ambient-glow top-10 -left-40 opacity-40"></div>
-      <div className="bg-ambient-glow bottom-0 right-0 opacity-30"></div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Headline & Bio Pitch */}
+    <section className="pt-28 pb-16 sm:pt-36 sm:pb-20 bg-white border-b border-slate-200/90">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          {/* Left Column: Headline & Bio */}
           <div className="lg:col-span-7 space-y-6 text-left">
-            {/* Status Pill Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold backdrop-blur-md shadow-lg shadow-emerald-500/10">
-              <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span>Available for New Projects & Opportunities</span>
-            </div>
-
-            {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
-              Architecting{" "}
-              <span className="accent-text-gradient">Production-Grade</span> Web
-              Apps & Real-Time Systems.
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight leading-[1.15]">
+              Full-Stack Engineer Building{" "}
+              <span className="text-blue-600">Production-Grade</span> Web
+              Applications.
             </h1>
 
-            {/* Sub-headline */}
-            <p className="text-base sm:text-lg text-gray-300 max-w-2xl font-normal leading-relaxed">
-              Full-Stack Developer & Co-Founder at{" "}
-              <Link
-                href="https://nexovatelabs.com"
-                className="text-white font-semibold underline decoration-cyan-500 decoration-2 underline-offset-4"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Nexovate Labs
-              </Link>
-              . Specializing in{" "}
-              <span className="text-cyan-300">
-                Next.js, React, Node.js, Express, PostgreSQL, Prisma, MongoDB
-              </span>{" "}
-              & Socket.IO. Delivered 8+ live web products for clients worldwide.
+            <p className="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+              {PERSONAL_INFO.bio}
             </p>
 
-            {/* Quick Tech Tag Cloud */}
-            <div className="flex flex-wrap items-center gap-2 pt-1">
-              {[
-                "React.js",
-                "Next.js 15",
-                "TypeScript",
-                "Node.js",
-                "PostgreSQL",
-                "Prisma",
-                "MongoDB",
-                "Socket.IO",
-                "VPS Deploy",
-              ].map((skill) => (
+            {/* Core Stack Tags */}
+            <div className="flex flex-wrap items-center gap-2">
+              {coreSkills.map((skill) => (
                 <span
                   key={skill}
-                  className="px-2.5 py-1 rounded-md text-xs font-medium text-gray-300 bg-white/5 border border-white/10 hover:border-cyan-500/50 hover:text-white transition-all"
+                  className="px-2.5 py-1 rounded-md text-xs font-medium text-slate-700 bg-slate-100 border border-slate-200/80"
                 >
                   {skill}
                 </span>
               ))}
             </div>
 
-            {/* Primary Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
+            {/* Primary Actions */}
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 pt-1">
               <a
                 href="#production-apps"
-                className="px-6 py-3.5 rounded-xl font-bold text-sm text-white accent-bg-gradient shadow-xl shadow-cyan-500/20 hover:scale-105 active:scale-95 transition-all flex items-center gap-2 group"
+                className="inline-flex items-center justify-center gap-2 px-6 min-h-[44px] rounded-lg font-semibold text-sm text-white bg-blue-600 hover:bg-blue-700 transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0"
               >
-                <span>View 8+ Production Apps</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <span>View Production Work</span>
+                <ArrowRight className="w-4 h-4" />
               </a>
 
-              <a
-                href="#contact"
-                className="px-6 py-3.5 rounded-xl font-semibold text-sm text-gray-200 bg-white/5 hover:bg-white/10 border border-white/15 hover:border-white/30 backdrop-blur-md transition-all hover:scale-105 active:scale-95 flex items-center gap-2"
+              <Link
+                href="/cv"
+                className="inline-flex items-center justify-center gap-2 px-6 min-h-[44px] rounded-lg font-semibold text-sm text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0"
               >
-                <Zap className="w-4 h-4 text-amber-400" />
-                <span>Get In Touch</span>
-              </a>
-            </div>
-
-            {/* Trust Guarantees */}
-            <div className="pt-4 flex flex-wrap items-center gap-6 text-xs text-gray-400 border-t border-white/10">
-              <div className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>100% Verified Live Production Sites</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-cyan-400" />
-                <span>End-to-End Scalable Engineering</span>
-              </div>
+                <FileText className="w-4 h-4 text-blue-600" />
+                <span>View / Download CV</span>
+              </Link>
             </div>
           </div>
 
-          {/* Right Column: Prominent Large Profile Showcase & Code Window */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="relative group">
-              {/* Ambient Glow */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-purple-600 to-emerald-500 rounded-3xl blur-2xl opacity-40 group-hover:opacity-75 transition duration-500"></div>
-
-              {/* Glass Card */}
-              <div className="relative rounded-3xl bg-[#0c1017] border border-white/20 shadow-2xl p-6 sm:p-7 space-y-5 text-center">
-                {/* Large Prominent Profile Frame */}
-                <div className="relative w-52 h-52 sm:w-64 sm:h-64 mx-auto rounded-3xl overflow-hidden p-[3px] bg-gradient-to-tr from-cyan-400 via-purple-500 to-emerald-400 shadow-2xl shadow-cyan-500/25 group-hover:scale-[1.02] transition-transform duration-500">
-                  <div className="w-full h-full rounded-[21px] overflow-hidden relative bg-[#07090e]">
-                    <Image
-                      src="/naim-profile.jpg"
-                      alt="Naim Hossain - Full-Stack Engineer & Founder"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 300px"
-                      className="object-cover object-top hover:scale-105 transition-transform duration-500"
-                      priority
-                      quality={95}
-                    />
-                  </div>
+          {/* Right Column: Clean Profile Card */}
+          <div className="lg:col-span-5">
+            <div className="rounded-2xl bg-slate-50 border border-slate-200 p-6 sm:p-7 space-y-5">
+              <div className="flex flex-col sm:flex-row lg:flex-col items-center gap-5 text-center sm:text-left lg:text-center">
+                <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-2xl overflow-hidden border border-slate-200 bg-white shrink-0 shadow-2xs">
+                  <Image
+                    src="/naim-profile.jpg"
+                    alt="Naim Hossain - Full-Stack Web Developer"
+                    fill
+                    sizes="(max-width: 768px) 144px, 176px"
+                    className="object-cover object-top"
+                    priority
+                    quality={95}
+                  />
                 </div>
 
-                {/* Founder Info */}
-                <div className="space-y-1 pt-1">
-                  <h3 className="text-2xl font-extrabold text-white tracking-tight flex items-center justify-center gap-2">
-                    <span>Naim Hossain</span>
-                    <Award className="w-5 h-5 text-cyan-400" />
-                  </h3>
-                  <p className="text-xs font-semibold text-cyan-300">
-                    Co-Founder & Full-Stack Developer @ Nexovate Labs
+                <div className="space-y-1">
+                  <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+                    {PERSONAL_INFO.name}
+                  </h2>
+                  <p className="text-sm font-semibold text-blue-600">
+                    Full-Stack Developer &amp; Co-Founder
                   </p>
-                  <p className="text-[11px] text-gray-400">
-                    B.Sc. in ICT • Jahangirnagar University
-                  </p>
+                  <p className="text-xs text-slate-600">Nexovate Labs</p>
                 </div>
+              </div>
 
-                {/* Code Config Box */}
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-left space-y-2">
-                  <div className="flex items-center justify-between text-[11px] font-mono text-gray-400 border-b border-white/10 pb-2">
-                    <span className="flex items-center gap-1.5 text-cyan-400">
-                      <Terminal className="w-3.5 h-3.5" />
-                      naim-engineer.config.ts
-                    </span>
-                    <span className="text-emerald-400 font-semibold">
-                      🟢 Open for Hire
-                    </span>
-                  </div>
-                  <div className="font-mono text-xs text-gray-300 space-y-1 pt-1 leading-relaxed">
-                    <p>
-                      <span className="text-purple-400">const</span> founder =
-                      &#123;
-                    </p>
-                    <p className="pl-4">
-                      <span className="text-cyan-400">productionApps</span>:{" "}
-                      <span className="text-emerald-300">
-                        &apos;8+ Live&apos;
-                      </span>
-                      ,
-                    </p>
-                    <p className="pl-4">
-                      <span className="text-cyan-400">coreStack</span>: [
-                      <span className="text-amber-300">
-                        &apos;Next.js&apos;
-                      </span>
-                      , <span className="text-amber-300">&apos;Node&apos;</span>
-                      ,{" "}
-                      <span className="text-amber-300">
-                        &apos;PostgreSQL&apos;
-                      </span>
-                      ],
-                    </p>
-                    <p className="pl-4">
-                      <span className="text-cyan-400">deliveryRate</span>:{" "}
-                      <span className="text-emerald-400">
-                        &apos;100% On-Time&apos;
-                      </span>
-                      ,
-                    </p>
-                    <p>&#125;;</p>
-                  </div>
+              <div className="pt-4 border-t border-slate-200 space-y-2.5 text-xs text-slate-700">
+                <div className="flex items-center gap-2.5">
+                  <Building2 className="w-4 h-4 text-blue-600 shrink-0" />
+                  <span>Co-Founder @ Nexovate Labs</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <GraduationCap className="w-4 h-4 text-blue-600 shrink-0" />
+                  <span>B.Sc. in ICT, Jahangirnagar University</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <MapPin className="w-4 h-4 text-blue-600 shrink-0" />
+                  <span>{PERSONAL_INFO.location}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Metrics Grid */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
-          {metrics.map((m, idx) => (
+        {/* Concise Metrics Row */}
+        <div className="mt-14 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {metrics.map((m) => (
             <div
-              key={idx}
-              className="p-5 rounded-2xl glass-panel glass-panel-hover text-left space-y-1 relative overflow-hidden group"
+              key={m.label}
+              className="p-5 rounded-xl surface-card surface-card-interactive text-left space-y-1"
             >
-              <div className="text-3xl sm:text-4xl font-extrabold accent-text-gradient tracking-tight">
+              <div className="text-2xl sm:text-3xl font-bold text-blue-600 tracking-tight">
                 {m.value}
               </div>
-              <div className="text-sm font-semibold text-white tracking-wide">
+              <div className="text-sm font-semibold text-slate-900">
                 {m.label}
               </div>
-              <div className="text-xs text-gray-400">{m.highlight}</div>
+              <div className="text-xs text-slate-600">{m.detail}</div>
             </div>
           ))}
         </div>

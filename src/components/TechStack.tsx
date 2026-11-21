@@ -1,57 +1,50 @@
-'use client';
-
 import { Code2, Layout, Server, Database, Cloud } from 'lucide-react';
 import { TECHNICAL_SKILLS } from '@/data/portfolioData';
 
 export default function TechStack() {
   const categoryIcons: Record<string, React.ReactNode> = {
-    'Languages & Core CS': <Code2 className="w-5 h-5 text-cyan-400" />,
-    'Frontend Engineering': <Layout className="w-5 h-5 text-purple-400" />,
-    'Backend & APIs': <Server className="w-5 h-5 text-emerald-400" />,
-    'Databases & ORM': <Database className="w-5 h-5 text-amber-400" />,
-    'DevOps & Tools': <Cloud className="w-5 h-5 text-blue-400" />,
+    'Languages & Core CS': <Code2 className="w-5 h-5 text-blue-600" />,
+    'Frontend Engineering': <Layout className="w-5 h-5 text-blue-600" />,
+    'Backend & APIs': <Server className="w-5 h-5 text-blue-600" />,
+    'Databases & ORM': <Database className="w-5 h-5 text-blue-600" />,
+    'DevOps & Tools': <Cloud className="w-5 h-5 text-blue-600" />,
   };
 
   return (
-    <section id="tech-stack" className="py-24 relative">
+    <section id="tech-stack" className="py-16 sm:py-24 bg-slate-50 border-b border-slate-200/90">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3 mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold">
-            <span>Technical Mastery</span>
+        <div className="max-w-2xl space-y-2.5 mb-12">
+          <div className="inline-flex items-center px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200/80">
+            Technical Stack
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Engineering <span className="accent-text-gradient">Tech Stack</span> & Tools
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight">
+            Core <span className="text-blue-600">Technologies</span> &amp; Tools
           </h2>
-          <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
-            Proficient across modern frontend frameworks, scalable backends, relational & NoSQL databases, and cloud infrastructure.
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            Production experience across modern frontend frameworks, backend APIs, databases, and cloud deployment.
           </p>
         </div>
 
-        {/* Stack Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {TECHNICAL_SKILLS.map((group, idx) => (
+          {TECHNICAL_SKILLS.map((group) => (
             <div
-              key={idx}
-              className="p-6 rounded-3xl glass-panel glass-panel-hover space-y-5 relative group"
+              key={group.category}
+              className="p-6 rounded-xl surface-card surface-card-interactive space-y-5"
             >
-              {/* Category Header */}
-              <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+              <div className="flex items-center gap-3 border-b border-slate-200/80 pb-4">
+                <div className="w-10 h-10 rounded-lg bg-blue-50 border border-blue-200/80 flex items-center justify-center shrink-0">
                   {categoryIcons[group.category]}
                 </div>
-                <h3 className="text-base font-bold text-white group-hover:text-cyan-300 transition-colors">
+                <h3 className="text-base font-bold text-slate-900">
                   {group.category}
                 </h3>
               </div>
 
-              {/* Skill Pill Badges */}
               <div className="flex flex-wrap gap-2">
                 {group.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1.5 rounded-xl text-xs font-semibold text-gray-200 bg-white/5 border border-white/10 hover:border-cyan-500/50 hover:bg-cyan-950/30 hover:text-white transition-all cursor-default"
+                    className="px-2.5 py-1 rounded-md text-xs font-medium text-slate-700 bg-slate-100 border border-slate-200/80"
                   >
                     {skill}
                   </span>
@@ -60,7 +53,6 @@ export default function TechStack() {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );
